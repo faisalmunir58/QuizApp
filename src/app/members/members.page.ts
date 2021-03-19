@@ -10,15 +10,27 @@ export class MembersPage implements OnInit {
   public teacherpage = [
     {
       title: "Home",
-      url: "/members/teacher/home",
+      url: "home",
       icon: "moon"
     },
     {
-      title: "Quiz",
-      url: "/members/teacher/quiz/add",
+      title: "View",
+      url: "view",
+      icon: "create"
+    },
+    {
+      title: "Add",
+      url: "add",
+      icon: "create"
+    },
+    {
+      title: "Edit",
+      url: "edit",
       icon: "create"
     },
     
+
+
   ];
 
   constructor() { }
