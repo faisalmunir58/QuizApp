@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="registrationData" (ngSubmit)="RequestForRegistration()">
+
+    <ion-radio-group formControlName="userType">
+      <ion-list-header>
+        userType
+      </ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">Admin</ion-label>
+              <ion-radio slot="start" value="Admin"></ion-radio>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">Teacher</ion-label>
+              <ion-radio slot="start" value="Teacher"></ion-radio>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">Student</ion-label>
+              <ion-radio slot="start" value="Student"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-radio-group>
+
+    <div class="form">
+      <!-- <ion-item lines="none">
+    
+      <ion-input type="text" placeholder="Enter FirstName" required formControlName="firstName"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+       <ion-input type="text" placeholder="Enter LastName" required formControlName="lastName"></ion-input>
+    </ion-item> -->
+
+      <ion-item lines="none">
+        <ion-input type="text" placeholder="Enter Email" required formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-input type="Password" placeholder="Enter Password" required formControlName="password"></ion-input>
+      </ion-item>
+
+    </div>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="tertiary" expand="block" [disabled]="!registrationData.valid">Sign Up
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>
