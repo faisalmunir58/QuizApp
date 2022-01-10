@@ -1,12 +1,33 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
+    <ion-title>Add Quiz</ion-title>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-back-button defaultHref="/members"></ion-back-button>
     </ion-buttons>
-    <ion-title>add</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <form [formGroup]="Quizdata" (ngSubmit)="AddQuiz()">
+
+    <ion-item>
+      <ion-label position="stacked" disabled>maxattempts:</ion-label>
+      <ion-input required type="number" formControlName="allowedAttempts"></ion-input>
+      <ion-label position="stacked">maxtime:</ion-label>
+      <ion-input required type="number" formControlName="allowedTime"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label></ion-label>
+      <ion-textarea placeholder="Enter subject name here:" type="text" required formControlName="name"></ion-textarea>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="tertiary" expand="block" [disabled]="!Quizdata.valid">submit</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
 </ion-content>
