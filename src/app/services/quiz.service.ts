@@ -21,4 +21,19 @@ export class QuizService extends BaseService {
       catchError(this.handleError)
     );
   }
+
+  getQuizByID(id): Observable<any> {
+    const url = `${environment.BASE_URL}papers/get/by-id/${id}`;
+    return this.http.get(url, this.httpOptions).pipe(
+      // Map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+  editQuiz(data){
+    const url = `${environment.BASE_URL}papers/update`;
+    return this.http.put(url, data, this.httpOptions).pipe(
+      // Map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
 }

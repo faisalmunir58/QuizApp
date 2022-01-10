@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { LoginService } from 'src/app/services/login.service';
 import { QuizService } from 'src/app/services/quiz.service';
 import { ToastService } from 'src/app/shared/toast.service';
 
@@ -30,10 +29,12 @@ export class HomePage implements OnInit {
   ) {
     this.editQuizdata = this.FormBuilder.group({
       'name': [null],
-      'maxtime': [null],
-      'maxattempts': [null],
+      'allowedTime': [null],
+      'allowedAttempts': [null],
       'id': [null],
-      'userId': [null]
+      'createdById': [null],
+      'type': ['mcq'],
+      'assignedGroupId': ['1']
     })
   }
 
@@ -54,10 +55,33 @@ export class HomePage implements OnInit {
     await this.quizservice.getAllQuiz()
       .subscribe(res => {
         if (res.success) {
-          console.log(res.data)
           this.Quizzes = res.data;
-          console.log(this.Quizzes);
           loading.dismiss();
+        }
+        else {
+          loading.dismiss();
+          this.toastService.create(res.message);
+        }
+      });
+  }
+
+  async EditQuiz(id) {
+    //this.router.navigate(['/members']);
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+    await loading.present();
+    await this.quizservice.getQuizByID(id)
+      .subscribe(res => {
+        if (res.success) {
+          this.Quizdata = res.data;
+          this.editQuizdata.controls['name'].setValue(this.Quizdata.name);
+          this.editQuizdata.controls['allowedTime'].setValue(this.Quizdata.allowedTime);
+          this.editQuizdata.controls['allowedAttempts'].setValue(this.Quizdata.allowedAttempts);
+          this.editQuizdata.controls['id'].setValue(this.Quizdata.id);
+          this.editQuizdata.controls['createdById'].setValue(this.Quizdata.createdById);
+          loading.dismiss();
+          this.EditBtnAlert();
         }
         else {
           loading.dismiss();
@@ -71,7 +95,7 @@ export class HomePage implements OnInit {
     this.router.navigate(['/Teacher/mcqlist']);
   }
 
-  async EditBtnAlert(quizid) {
+  async EditBtnAlert() {
     //console.log(this.editQuizdata.value);
 
     const alert = await this.alertCtrl.create({
@@ -88,13 +112,13 @@ export class HomePage implements OnInit {
         {
           name: 'maxtime',
           type: 'number',
-          value: this.editQuizdata.value.maxattempts
+          value: this.editQuizdata.value.allowedTime
 
         },
         {
           name: 'maxattempts',
           type: 'number',
-          value: this.editQuizdata.value.maxtime
+          value: this.editQuizdata.value.allowedAttempts
         }
       ],
 
@@ -112,11 +136,10 @@ export class HomePage implements OnInit {
           handler: (value: any) => {
             //console.log('Confirm Okay', value);
             this.editQuizdata.value.name = value.Name;
-            this.editQuizdata.value.maxtime = value.maxtime;
-            this.editQuizdata.value.maxattempts = value.maxattempts;
-            console.log(this.editQuizdata.value)
+            this.editQuizdata.value.allowedTime = value.maxtime;
+            this.editQuizdata.value.allowedAttempts = value.maxattempts;
 
-            //this.EditQuizRequest();
+            this.EditQuizRequest();
           }
         }
       ]
@@ -124,9 +147,24 @@ export class HomePage implements OnInit {
     await alert.present()
   }
 
-  QuizData(quizid) {
-    console.log("get one quiz data for edit")
-
+  async EditQuizRequest() {
+    //this.router.navigate(['/members']);
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+    await loading.present();
+    await this.quizservice.editQuiz(this.editQuizdata.value)
+      .subscribe(res => {
+        if (res) {
+          loading.dismiss();
+          this.getAllQuiz();
+          this.toastService.create("Succfully update");
+        }
+        else {
+          loading.dismiss();
+          this.toastService.create("something is wrong");
+        }
+      });
   }
 
   async deleteBtnAlert(quizid) {
@@ -149,7 +187,7 @@ export class HomePage implements OnInit {
           handler: (value: any) => {
             console.log('Confirm Okay');
             //this.deleteBtn(quizid);
-            
+
           }
         }
       ]
