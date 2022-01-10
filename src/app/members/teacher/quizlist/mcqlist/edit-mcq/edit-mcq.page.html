@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>editmcq</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="mcqlist"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="editQuestiondata">
+
+  <ion-item lines="full">
+    <ion-label position="floating">Subcription</ion-label>
+    <ion-input  type="text" required formControlName="question" ></ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label position="floating">correct Answer</ion-label>
+    <ion-input type="text"required formControlName="answer" value={{answer}} ></ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label position="floating">Marks</ion-label>
+    <ion-input type="text"required formControlName="totalMarks" value={{totalMarks}} ></ion-input>
+  </ion-item>
+
+ <ion-row>
+  <ion-col>
+    <ion-button (click)="puteditdata()" type="submit" color="primary" expand="block" >submit</ion-button>
+  </ion-col>
+</ion-row>
+
+</form>
+</ion-content>

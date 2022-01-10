@@ -91,7 +91,8 @@ export class QuizlistPage implements OnInit {
   }
 
   Quizlist(val) {
-    this.storage.set("select_quizid", val);
+    this.storage.create();
+    this.storage.set("selected_quizid", val);
     this.router.navigate(['/mcqlist']);
   }
 

@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: MCQlistPage
+  },
+  {
+    path: 'edit-mcq/:myid',
+    loadChildren: () => import('../MCQlist/edit-mcq/edit-mcq.module').then( m => m.EditMcqPageModule)
+  },
+  {
+    path: 'add-mcq',
+    loadChildren: () => import('../MCQlist/add-mcq/add-mcq.module').then( m => m.AddMcqPageModule)
   }
 ];
 

@@ -15,6 +15,7 @@ import { ToastService } from 'src/app/shared/toast.service';
 export class MCQlistPage implements OnInit {
 
   Questions: any;
+  selected_quizid = 8;
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -27,11 +28,15 @@ export class MCQlistPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("MCQ list page")
+    this.storage.create();
+    this.storage.get('selected_quizid').then((userID) => {
+      //this.selected_quizid = userID;
+    });
     this.getAllQuestion();
   }
 
   async getAllQuestion() {
+
     //this.router.navigate(['/members']);
     const loading = await this.loadingController.create({
       message: 'Loading'
@@ -40,7 +45,6 @@ export class MCQlistPage implements OnInit {
     await this.questionservice.getallQuestions()
       .subscribe(res => {
         if (res.success) {
-          console.log(res.data);
           this.Questions = res.data;
           loading.dismiss();
         }

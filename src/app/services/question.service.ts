@@ -20,4 +20,18 @@ export class QuestionService extends BaseService {
       catchError(this.handleError)
     );
   }
+
+  getQuestionsByID(id): Observable<any> {
+    const url = `${environment.BASE_URL}questions/get/by-id/${id}`;
+    return this.http.get(url, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  edittQuestions(data): Observable<any> {
+    const url = `${environment.BASE_URL}questions/update`;
+    return this.http.put(url, data, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
