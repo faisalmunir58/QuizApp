@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddPageRoutingModule } from './add-routing.module';
+import { QuizlistPageRoutingModule } from './quizlist-routing.module';
 
-import { AddPage } from './add.page';
+import { QuizlistPage } from './quizlist.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddPageRoutingModule,
+    QuizlistPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AddPage]
+  declarations: [QuizlistPage]
 })
-export class AddPageModule { }
+export class QuizlistPageModule {}

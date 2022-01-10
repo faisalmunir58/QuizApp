@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./public/registration/registration.module').then( m => m.RegistrationPageModule)
   },
   {
+    path: 'quizlist',
+    loadChildren: () => import('./members/teacher/quizlist/quizlist.module').then( m => m.QuizlistPageModule)
+  },
+  {
     path: 'members',
     loadChildren: () => import('./members/members.module').then( m => m.MembersPageModule)
   }

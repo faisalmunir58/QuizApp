@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
           this.storage.create();
           this.storage.set("UserID", res.data.id);
           loading.dismiss();
-          this.router.navigate(['/members']);
+          this.router.navigate(['/quizlist']);
         }
         else {
           loading.dismiss();

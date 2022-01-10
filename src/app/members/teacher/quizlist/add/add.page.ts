@@ -16,7 +16,6 @@ export class AddPage implements OnInit {
 
   Quizdata: FormGroup;
   uID: any;
-
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -42,7 +41,6 @@ export class AddPage implements OnInit {
     this.storage.get('UserID').then((userID) => {
       this.uID = userID;
     });
-
   }
 
   async AddQuiz() {
@@ -55,7 +53,6 @@ export class AddPage implements OnInit {
     await this.quizservice.addQuiz(this.Quizdata.value)
       .subscribe(res => {
         if (res.success) {
-          console.log('true');
           loading.dismiss();
           this.router.navigate(['/members']);
         }

@@ -10,9 +10,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: () => import('./teacher/home/home.module').then( m => m.HomePageModule)},
-      { path: 'view', loadChildren: () => import('./teacher/quiz/view/view.module').then( m => m.ViewPageModule)},
-      { path: 'add', loadChildren: () => import('./teacher/quiz/add/add.module').then( m => m.AddPageModule)},
-      { path: 'edit', loadChildren: () => import('./teacher/quiz/edit/edit.module').then( m => m.EditPageModule)},
+      //{ path: 'add', loadChildren: () => import('./teacher/quiz/add/add.module').then( m => m.AddPageModule)},
     ]
   },
 ];
