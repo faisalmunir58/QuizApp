@@ -92,7 +92,7 @@ export class QuizlistPage implements OnInit {
 
   Quizlist(val) {
     this.storage.set("select_quizid", val);
-    this.router.navigate(['/Teacher/mcqlist']);
+    this.router.navigate(['/mcqlist']);
   }
 
   async EditBtnAlert() {

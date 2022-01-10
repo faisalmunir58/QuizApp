@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'quizlist',
     loadChildren: () => import('./members/teacher/quizlist/quizlist.module').then( m => m.QuizlistPageModule)
   },
+  {
+    path: 'mcqlist',
+    loadChildren: () => import('./members/teacher/quizlist/mcqlist/mcqlist.module').then( m => m.MCQlistPageModule)
+  }
   
   
 ];
