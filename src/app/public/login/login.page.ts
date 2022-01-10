@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -18,32 +19,36 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     private loginservice: LoginService,
     private toastService: ToastService,
+    private storage: Storage,
   ) {
     this.fg = this.formBuilder.group({
       'email': [null, Validators.required],
-      'Password': [null, Validators.required],
+      'password': [null, Validators.required],
+      'userType': [null, Validators.required],
     });
   }
 
-   async login() {
+  login1() {
+    console.log(this.fg.value);
+  }
+  async login() {
     //this.router.navigate(['/members']);
     const loading = await this.loadingController.create({
       message: 'Loading'
     });
     await loading.present();
-    await this.loginservice.getAllUser()
+    await this.loginservice.checkAuth(this.fg.value)
       .subscribe(res => {
-        if (res.IsSuccess) {
+        if (res.success) {
+          this.storage.create();
+          this.storage.set("UserID", res.data.id);
           loading.dismiss();
-          console.log("true");
+          this.router.navigate(['/members']);
         }
         else {
           loading.dismiss();
-          console.log("true");
+          this.toastService.create(res.message);
         }
-      }, (err) => {
-        loading.dismiss();
-        this.toastService.create(err, 'danger');
       });
   }
   ngOnInit() {

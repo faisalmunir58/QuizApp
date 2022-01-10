@@ -1,7 +1,8 @@
 {
   "name": "quizapp",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

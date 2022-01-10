@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { MembersPageRoutingModule } from './members-routing.module';
-
 import { MembersPage } from './members.page';
 
 @NgModule({
@@ -17,4 +16,4 @@ import { MembersPage } from './members.page';
   ],
   declarations: [MembersPage]
 })
-export class MembersPageModule {}
+export class MembersPageModule { }

@@ -9,6 +9,35 @@
 
 <ion-content>
   <form [formGroup]="fg">
+    <ion-radio-group formControlName="userType">
+      <ion-list-header>
+        userType
+      </ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">Admin</ion-label>
+              <ion-radio slot="start" value="Admin"></ion-radio>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">Teacher</ion-label>
+              <ion-radio slot="start" value="Teacher"></ion-radio>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label color="primary">Student</ion-label>
+              <ion-radio slot="start" value="Student"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-radio-group>
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
       <ion-input type="text" required formControlName="email"></ion-input>
@@ -16,13 +45,13 @@
 
     <ion-item lines="full">
       <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required formControlName="Password"></ion-input>
+      <ion-input type="password" required formControlName="password"></ion-input>
     </ion-item>
 
     <ion-row>
       <ion-col>
         <ion-button type="submit" color="danger" expand="block" (click)="login()">Sign In</ion-button>
-        <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a>
+        <!-- <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a> -->
       </ion-col>
     </ion-row>
   </form>
