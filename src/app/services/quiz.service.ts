@@ -29,9 +29,18 @@ export class QuizService extends BaseService {
       catchError(this.handleError)
     );
   }
-  editQuiz(data){
+
+  editQuiz(data): Observable<any> {
     const url = `${environment.BASE_URL}papers/update`;
     return this.http.put(url, data, this.httpOptions).pipe(
+      // Map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  deleteQuiz(id): Observable<any> {
+    const url = `${environment.BASE_URL}papers/delete/by-id/${id}`;
+    return this.http.delete(url, this.httpOptions).pipe(
       // Map(this.extractData),
       catchError(this.handleError)
     );

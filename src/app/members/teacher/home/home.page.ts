@@ -180,19 +180,38 @@ export class HomePage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (value: any) => {
-            console.log('Confirm Cancel');
           }
         }, {
           text: 'Okay',
           handler: (value: any) => {
             console.log('Confirm Okay');
-            //this.deleteBtn(quizid);
+            this.DeleteQuizRequest(quizid);
 
           }
         }
       ]
     })
     await alert.present()
+  }
+
+  async DeleteQuizRequest(id) {
+    //this.router.navigate(['/members']);
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+    await loading.present();
+    await this.quizservice.deleteQuiz(id)
+      .subscribe(res => {
+        if (res.success) {
+          this.getAllQuiz();
+          loading.dismiss();
+          this.toastService.create("Succfully deleted");
+        }
+        else {
+          loading.dismiss();
+          this.toastService.create("something is wrong");
+        }
+      });
   }
 
 }
