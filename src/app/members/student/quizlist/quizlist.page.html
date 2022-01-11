@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>quizlist</ion-title>
+  <ion-toolbar color="danger">
+    <ion-title>Quiz List</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-list *ngFor="let quiz of Quizzes" style="border-bottom: 1px solid grey">
+
+    <ion-item lines="none">
+      <ion-label>{{quiz.name}}</ion-label>
+      <ion-button routerLink="/student/mcq/{{quiz.id}}">Start</ion-button>
+    </ion-item>
+
+    <ion-label color="medium" style="margin-left: 30px;">maxtime:{{quiz.allowedTime}}</ion-label>
+    <!-- <ion-label color="medium" style="margin-left: 50px;">maxattempts:{{quiz.allowedAttempts}}</ion-label> -->
+  </ion-list>
 
 </ion-content>

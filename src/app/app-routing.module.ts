@@ -26,6 +26,17 @@ const routes: Routes = [
   {
     path: 'mcqlist',
     loadChildren: () => import('./members/teacher/quizlist/mcqlist/mcqlist.module').then( m => m.MCQlistPageModule)
+  },
+
+
+
+  {
+    path: 'student/quizlist',
+    loadChildren: () => import('./members/student/quizlist//quizlist.module').then( m => m.QuizlistPageModule)
+  },
+  {
+    path: 'student/mcq/:myid',
+    loadChildren: () => import('./members/student/quizlist/mcqlist/mcqlist.module').then( m => m.MCQlistPageModule)
   }
   
   

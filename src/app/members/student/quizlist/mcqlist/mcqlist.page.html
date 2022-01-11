@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>MCQlist</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/student/quizlist"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list *ngFor="let mcq of Questions">
+    <div *ngIf="mcq.paperId==quizId">
+
+      <ion-item lines="none" style="border-bottom: 1px solid grey">
+        <ion-label>{{mcq.question}}</ion-label>
+        <div *ngFor="let option of options">
+
+          <div *ngIf="option.questionId==mcq.id">
+            <p>yes</p>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" routerLink="add-mcq">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

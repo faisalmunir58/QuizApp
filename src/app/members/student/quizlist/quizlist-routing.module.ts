@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: QuizlistPage
+  },
+  {
+    path: 'mcqlists',
+    loadChildren: () => import('./mcqlist/mcqlist.module').then( m => m.MCQlistPageModule)
   }
 ];
 

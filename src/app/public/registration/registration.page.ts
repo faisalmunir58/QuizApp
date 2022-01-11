@@ -39,10 +39,8 @@ export class RegistrationPage implements OnInit {
 
   ngOnInit() {
   }
-  RequestForRegistration() {
-    console.log(this.registrationData.value)
-  }
-  async RequestForRegistration1() {
+
+  async RequestForRegistration() {
 
     const loading = await this.loadingController.create({
       message: 'Loading'
@@ -52,7 +50,7 @@ export class RegistrationPage implements OnInit {
       .subscribe(res => {
         if (res.IsSuccess) {
           loading.dismiss();
-          console.log("true");
+          this.toastService.create('Succfully Rigister');
         }
         else {
           loading.dismiss();

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { MCQService } from 'src/app/services/mcq.service';
+import { OptionsService } from 'src/app/services/options.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { ToastService } from 'src/app/shared/toast.service';
 
@@ -14,27 +15,29 @@ import { ToastService } from 'src/app/shared/toast.service';
 })
 export class MCQlistPage implements OnInit {
 
+  quizId: any;
   Questions: any;
-
+  OptionsData: any;
   selected_quizid: any;
-
   constructor(
+
+    public route: ActivatedRoute,
     public router: Router,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private questionservice: QuestionService,
+    private optionservice: OptionsService,
     private toastService: ToastService,
     private storage: Storage,
+    private FormBuilder: FormBuilder,
     private alertCtrl: AlertController,
   ) { }
 
   ngOnInit() {
-    this.storage.create();
-    this.storage.get('paperId').then((userID) => {
-      console.log(userID)
-      this.selected_quizid = userID;
-    });
+
+    this.quizId = this.route.snapshot.paramMap.get('myid');
     this.getAllQuestion();
+    this.getAllOptions();
   }
 
   async getAllQuestion() {
@@ -46,6 +49,7 @@ export class MCQlistPage implements OnInit {
     await this.questionservice.getallQuestions()
       .subscribe(res => {
         if (res.success) {
+          console.log(res.data);
           this.Questions = res.data;
           loading.dismiss();
         }
@@ -56,42 +60,17 @@ export class MCQlistPage implements OnInit {
       });
   }
 
-  async deleteBtnAlert(questionID) {
-
-    const alert = await this.alertCtrl.create({
-      cssClass: 'my-custom-class',
-      header: 'Confirm!',
-      message: 'Are you sure you want to delete this quiz?',
-
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (value: any) => {
-          }
-        }, {
-          text: 'Okay',
-          handler: (value: any) => {
-            console.log(questionID);
-            this.requestforDeleteQuestion(questionID);
-
-          }
-        }
-      ]
-    })
-    await alert.present()
-  }
-
-  async requestforDeleteQuestion(id) {
+  async getAllOptions() {
+    //this.router.navigate(['/members']);
     const loading = await this.loadingController.create({
       message: 'Loading'
     });
     await loading.present();
-    await this.questionservice.deleteQuestion(id)
+    await this.optionservice.getAllOption()
       .subscribe(res => {
         if (res.success) {
-          this.getAllQuestion();
+          console.log(res.data);
+          this.OptionsData = res.data;
           loading.dismiss();
         }
         else {
@@ -100,4 +79,6 @@ export class MCQlistPage implements OnInit {
         }
       });
   }
+
+
 }

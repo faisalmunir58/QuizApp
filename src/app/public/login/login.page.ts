@@ -43,7 +43,14 @@ export class LoginPage implements OnInit {
           this.storage.create();
           this.storage.set("UserID", res.data.id);
           loading.dismiss();
-          this.router.navigate(['/quizlist']);
+          if (res.data.userType == 'Student') {
+            console.log('student');
+            this.router.navigate(['/student/quizlist']);
+          }
+          else {
+            this.router.navigate(['/quizlist']);
+          }
+
         }
         else {
           loading.dismiss();
