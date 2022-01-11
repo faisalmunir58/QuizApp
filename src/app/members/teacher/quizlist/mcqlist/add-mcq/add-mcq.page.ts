@@ -6,6 +6,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { QuestionService } from 'src/app/services/question.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { OptionsService } from 'src/app/services/options.service';
 
 @Component({
   selector: 'app-add-mcq',
@@ -24,6 +25,7 @@ export class AddMcqPage implements OnInit {
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private questionservice: QuestionService,
+    private optionservice: OptionsService,
     private toastService: ToastService,
     private storage: Storage,
     private FormBuilder: FormBuilder,
@@ -98,7 +100,7 @@ export class AddMcqPage implements OnInit {
           text: 'Okay',
 
           handler: (value: any) => {
-            this.optionData.value.name = value.Name;
+            this.optionData.value.option = value.Name;
             this.addOptionRequest();
           }
         }
@@ -112,11 +114,11 @@ export class AddMcqPage implements OnInit {
       message: 'Loading'
     });
     await loading.present();
-    await this.questionservice.getallQuestions()
+    await this.optionservice.addOption(this.optionData.value)
       .subscribe(res => {
         if (res) {
           loading.dismiss();
-          this.toastService.create("Succfully update");
+          this.toastService.create("Succfully added");
         }
         else {
           loading.dismiss();
