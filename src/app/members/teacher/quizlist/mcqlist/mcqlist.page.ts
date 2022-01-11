@@ -15,7 +15,9 @@ import { ToastService } from 'src/app/shared/toast.service';
 export class MCQlistPage implements OnInit {
 
   Questions: any;
-  selected_quizid = 8;
+
+  selected_quizid:any;
+  
   constructor(
     public router: Router,
     private formBuilder: FormBuilder,
@@ -29,14 +31,14 @@ export class MCQlistPage implements OnInit {
 
   ngOnInit() {
     this.storage.create();
-    this.storage.get('selected_quizid').then((userID) => {
-      //this.selected_quizid = userID;
+    this.storage.get('paperId').then((userID) => {
+      console.log(userID)
+      this.selected_quizid = userID;
     });
     this.getAllQuestion();
   }
 
   async getAllQuestion() {
-
     //this.router.navigate(['/members']);
     const loading = await this.loadingController.create({
       message: 'Loading'
@@ -46,6 +48,51 @@ export class MCQlistPage implements OnInit {
       .subscribe(res => {
         if (res.success) {
           this.Questions = res.data;
+          loading.dismiss();
+        }
+        else {
+          loading.dismiss();
+          this.toastService.create(res.message);
+        }
+      });
+  }
+
+  async deleteBtnAlert(questionID) {
+
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete this quiz?',
+
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (value: any) => {
+          }
+        }, {
+          text: 'Okay',
+          handler: (value: any) => {
+            console.log(questionID);
+            this.requestforDeleteQuestion(questionID);
+            
+          }
+        }
+      ]
+    })
+    await alert.present()
+  }
+
+  async requestforDeleteQuestion(id) {
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+    await loading.present();
+    await this.questionservice.deleteQuestion(id)
+      .subscribe(res => {
+        if (res.success) {
+          this.getAllQuestion();
           loading.dismiss();
         }
         else {

@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { MCQService } from 'src/app/services/mcq.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { ToastService } from 'src/app/shared/toast.service';
 
@@ -27,7 +26,6 @@ export class EditMcqPage implements OnInit {
     private toastService: ToastService,
     private storage: Storage,
     private FormBuilder: FormBuilder,
-    private alertCtrl: AlertController,
   ) {
     this.editQuestiondata = this.FormBuilder.group({
       'id': [null],

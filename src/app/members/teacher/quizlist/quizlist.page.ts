@@ -92,7 +92,7 @@ export class QuizlistPage implements OnInit {
 
   Quizlist(val) {
     this.storage.create();
-    this.storage.set("selected_quizid", val);
+    this.storage.set("paperId", val);
     this.router.navigate(['/mcqlist']);
   }
 
