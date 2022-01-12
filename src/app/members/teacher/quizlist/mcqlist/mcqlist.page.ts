@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { MCQService } from 'src/app/services/mcq.service';
+import { OptionsService } from 'src/app/services/options.service';
 import { QuestionService } from 'src/app/services/question.service';
 import { ToastService } from 'src/app/shared/toast.service';
 
@@ -17,6 +18,7 @@ export class MCQlistPage implements OnInit {
   Questions: any;
 
   selected_quizid: any;
+  optionData: any;
 
   constructor(
     public router: Router,
@@ -26,7 +28,14 @@ export class MCQlistPage implements OnInit {
     private toastService: ToastService,
     private storage: Storage,
     private alertCtrl: AlertController,
-  ) { }
+    private optionservice: OptionsService,
+    private FormBuilder: FormBuilder,
+  ) {
+    this.optionData = this.FormBuilder.group({
+      'questionId': [null],
+      'option': [null]
+    })
+  }
 
   ngOnInit() {
     this.storage.create();
@@ -97,6 +106,61 @@ export class MCQlistPage implements OnInit {
         else {
           loading.dismiss();
           this.toastService.create(res.message);
+        }
+      });
+  }
+
+  async alertForAddOption(id) {
+    this.optionData.value.questionId = id;
+
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Enter Option',
+
+      inputs: [
+        {
+          name: 'Name',
+          type: 'text',
+          value: this.optionData.value.option
+        }
+      ],
+
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (value: any) => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Okay',
+
+          handler: (value: any) => {
+            this.optionData.value.option = value.Name;
+            this.addOptionRequest();
+          }
+        }
+      ]
+    })
+    await alert.present()
+  }
+  async addOptionRequest() {
+    const loading = await this.loadingController.create({
+      message: 'Loading'
+    });
+    await loading.present();
+    console.log(this.optionData.value)
+    await this.optionservice.addOption(this.optionData.value)
+      .subscribe(res => {
+        if (res) {
+          loading.dismiss();
+          this.toastService.create("Succfully added");
+        }
+        else {
+          loading.dismiss();
+          this.toastService.create("something is wrong");
         }
       });
   }

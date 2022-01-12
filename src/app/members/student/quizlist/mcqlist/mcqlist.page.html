@@ -15,19 +15,12 @@
 
       <ion-item lines="none" style="border-bottom: 1px solid grey">
         <ion-label>{{mcq.question}}</ion-label>
-        <div *ngFor="let option of options">
-
+        <div *ngFor="let option of OptionsData">
           <div *ngIf="option.questionId==mcq.id">
-            <p>yes</p>
+            <p>{{option.option}}</p>
           </div>
         </div>
       </ion-item>
     </div>
   </ion-list>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="dark" routerLink="add-mcq">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

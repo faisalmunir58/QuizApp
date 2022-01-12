@@ -10,7 +10,7 @@
 
 <ion-content>
 
-  <ion-list *ngFor="let mcq of Questions" >
+  <ion-list *ngFor="let mcq of Questions">
     <div *ngIf="mcq.paperId==selected_quizid" style="border-bottom: 1px solid grey">
 
       <ion-item-sliding>
@@ -24,12 +24,16 @@
           </ion-item-option>
 
           <ion-item-option color="danger">
-            <ion-icon (click)="deleteBtnAlert(mcq.id)" slot="start" name="trash-outline" style="zoom:2.0;"></ion-icon>
+            <ion-icon (click)="deleteBtnAlert(mcq.id)" slot="start" name="trash-outline" ></ion-icon>
           </ion-item-option>
         </ion-item-options>
 
       </ion-item-sliding>
-      <ion-label color="medium" style="margin-left: 11px;">Answer: {{mcq.answer}}</ion-label>
+      <ion-item>
+        <ion-label color="medium" style="margin-left: 11px;">Answer: {{mcq.answer}}</ion-label>
+        <ion-button slot="end" (click)="alertForAddOption(mcq.id)">add option</ion-button>
+        <ion-button slot="end" routerLink="optionlist/{{mcq.id}}">view option</ion-button>
+      </ion-item>
     </div>
   </ion-list>
 

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Option list</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/mcqlist"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-list *ngFor="let options of alloptions">
+    <div *ngIf="options.questionId==questionid" style="border-bottom: 1px solid grey">
+
+      <ion-item-sliding>
+        <ion-item lines="none">
+          <ion-label>{{options.option}}</ion-label>
+          <ion-icon (click)="deleteOption(options.id)" slot="start" name="trash-outline"></ion-icon>
+        </ion-item>
+      </ion-item-sliding>
+    </div>
+  </ion-list>
+</ion-content>

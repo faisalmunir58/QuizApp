@@ -43,7 +43,7 @@ export class OptionsService extends BaseService {
   }
 
   DeleteOption(id): Observable<any> {
-    const url = `${environment.BASE_URL}options/delete/by-id${id}`;
+    const url = `${environment.BASE_URL}options/delete/by-id/${id}`;
     return this.http.delete(url, this.httpOptions).pipe(
       catchError(this.handleError)
     );

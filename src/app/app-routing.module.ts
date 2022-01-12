@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./members/teacher/quizlist/mcqlist/mcqlist.module').then( m => m.MCQlistPageModule)
   },
 
+{
+    path: 'mcqlist/optionlist/:myid',
+    loadChildren: () => import('./members/teacher/quizlist/optionlist/optionlist.module').then( m => m.OptionlistPageModule)
+  },
 
 
   {

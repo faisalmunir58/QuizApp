@@ -52,8 +52,14 @@ export class QuizlistPage implements OnInit {
       });
   }
 
-  startquiz(id){
+  startquiz(id) {
     console.log(id);
     this.router.navigate(['/student/mcq']);
+  }
+
+  async logout() {
+    this.storage.create();
+    this.storage.clear();
+    this.router.navigate(['/login'])
   }
 }

@@ -60,69 +60,12 @@ export class AddMcqPage implements OnInit {
       .subscribe(res => {
         if (res.success) {
           loading.dismiss();
-          console.log(res.data)
-          this.optionData.value.questionId = res.data.id
-          this.alertForAddOption();
-          //this.router.navigate(['/mcqlist']);
+          this.toastService.create('Successfully added')
+          this.router.navigate(['/mcqlist']);
         }
         else {
           loading.dismiss();
           this.toastService.create(res.message);
-        }
-      });
-  }
-
-  async alertForAddOption() {
-    //console.log(this.editQuizdata.value);
-
-    const alert = await this.alertCtrl.create({
-      cssClass: 'my-custom-class',
-      header: 'Confirm!',
-      message: 'Enter Option',
-
-      inputs: [
-        {
-          name: 'Name',
-          type: 'text',
-          value: this.optionData.value.option
-        }
-      ],
-
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (value: any) => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: 'Okay',
-
-          handler: (value: any) => {
-            this.optionData.value.option = value.Name;
-            this.addOptionRequest();
-          }
-        }
-      ]
-    })
-    await alert.present()
-  }
-
-  async addOptionRequest() {
-    const loading = await this.loadingController.create({
-      message: 'Loading'
-    });
-    await loading.present();
-    await this.optionservice.addOption(this.optionData.value)
-      .subscribe(res => {
-        if (res) {
-          loading.dismiss();
-          this.toastService.create("Succfully added");
-        }
-        else {
-          loading.dismiss();
-          this.toastService.create("something is wrong");
         }
       });
   }

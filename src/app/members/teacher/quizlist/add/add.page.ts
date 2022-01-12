@@ -32,7 +32,7 @@ export class AddPage implements OnInit {
       'allowedAttempts': [null],
       'createdById': [null],
       'type': ['mcq'],
-      'assignedGroupId': ['1']
+      'assignedGroupId': ['2']
     })
   }
 
@@ -54,7 +54,7 @@ export class AddPage implements OnInit {
       .subscribe(res => {
         if (res.success) {
           loading.dismiss();
-          this.router.navigate(['/members']);
+          this.router.navigate(['/quizlist']);
         }
         else {
           loading.dismiss();

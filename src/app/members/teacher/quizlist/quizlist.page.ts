@@ -215,4 +215,9 @@ export class QuizlistPage implements OnInit {
       });
   }
 
+  async logout() {
+    this.storage.clear();
+    this.router.navigate(['/login'])
+  }
+
 }

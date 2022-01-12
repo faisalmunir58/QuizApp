@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'mcqlist',
     loadChildren: () => import('./mcqlist/mcqlist.module').then( m => m.MCQlistPageModule)
-  }
+  },
+  // {
+  //   path: 'optionlist',
+  //   loadChildren: () => import('./optionlist/optionlist.module').then( m => m.OptionlistPageModule)
+  // }
 ];
 
 @NgModule({
