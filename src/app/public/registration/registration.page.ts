@@ -54,7 +54,7 @@ export class RegistrationPage implements OnInit {
         }
         else {
           loading.dismiss();
-          console.log("true");
+          this.toastService.create('Succfully Rigister');
         }
       }, (err) => {
         loading.dismiss();

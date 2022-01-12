@@ -19,6 +19,39 @@ export class MCQlistPage implements OnInit {
   Questions: any;
   OptionsData: any;
   selected_quizid: any;
+
+  //Get value on ionChange on IonRadioGroup
+  selectedRadioGroup: any;
+  //Get value on ionSelect on IonRadio item
+  selectedRadioItem: any;
+
+  radio_list = [
+    {
+      id: '1',
+      name: 'radio_list',
+      value: 'radio_1',
+      text: 'One',
+      disabled: false,
+      checked: false,
+      color: 'primary'
+    }, {
+      id: '2',
+      name: 'radio_list',
+      value: 'radio_2',
+      text: 'Two',
+      disabled: false,
+      checked: false,
+      color: 'secondary'
+    }, {
+      id: '3',
+      name: 'radio_list',
+      value: 'radio_3',
+      text: 'Three',
+      disabled: false,
+      checked: false,
+      color: 'danger'
+    },
+  ];
   constructor(
 
     public route: ActivatedRoute,
@@ -31,13 +64,20 @@ export class MCQlistPage implements OnInit {
     private storage: Storage,
     private FormBuilder: FormBuilder,
     private alertCtrl: AlertController,
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
 
     this.quizId = this.route.snapshot.paramMap.get('myid');
     this.getAllQuestion();
     this.getAllOptions();
+  }
+
+  radioGroupChange(event) {
+    console.log("radioGroupChange", event.detail);
+    this.selectedRadioGroup = event.detail;
   }
 
   async getAllQuestion() {

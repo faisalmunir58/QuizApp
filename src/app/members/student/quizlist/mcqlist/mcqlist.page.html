@@ -10,17 +10,52 @@
 
 <ion-content>
 
+
   <ion-list *ngFor="let mcq of Questions">
     <div *ngIf="mcq.paperId==quizId">
+      <ion-radio-group name="radio-group" (ionChange)="radioGroupChange($event)">
+        <ion-list-header>
+          <ion-label>{{mcq.question}}</ion-label>
+        </ion-list-header>
 
-      <ion-item lines="none" style="border-bottom: 1px solid grey">
-        <ion-label>{{mcq.question}}</ion-label>
-        <div *ngFor="let option of OptionsData">
-          <div *ngIf="option.questionId==mcq.id">
-            <p>{{option.option}}</p>
-          </div>
+        <div *ngFor="let options of OptionsData">
+          <ion-item *ngIf="options.questionId==mcq.id">
+
+            <ion-label>{{options.option}}</ion-label>
+            <ion-radio slot="start" value="{{options.option}}"></ion-radio>
+
+          </ion-item>
         </div>
-      </ion-item>
+      </ion-radio-group>
     </div>
   </ion-list>
+
+
+
+
+
+
+
+  <!-- <ion-list *ngFor="let mcq of Questions">
+    <div *ngIf="mcq.paperId==quizId">
+
+      <div lines="none" style="border-bottom: 1px solid grey">
+        <ion-label>{{mcq.question}}</ion-label>
+
+        <div *ngFor="let options of OptionsData let i = index">
+
+          <div *ngIf="options.questionId==mcq.id">
+
+            <ion-item>
+              <p>{{i}}</p>
+              <ion-label color="primary">{{options.option}}</ion-label>
+              <ion-radio slot="start" name="{{options.option}}" value="{{options.option}}"></ion-radio>
+            </ion-item>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ion-list> -->
 </ion-content>

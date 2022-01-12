@@ -10,8 +10,8 @@
 
 <ion-content>
 
-  <ion-list *ngFor="let options of alloptions">
-    <div *ngIf="options.questionId==questionid" style="border-bottom: 1px solid grey">
+  <div *ngFor="let options of alloptions">
+    <ion-list *ngIf="options.questionId==questionid" style="border-bottom: 1px solid grey">
 
       <ion-item-sliding>
         <ion-item lines="none">
@@ -19,6 +19,7 @@
           <ion-icon (click)="deleteOption(options.id)" slot="start" name="trash-outline"></ion-icon>
         </ion-item>
       </ion-item-sliding>
-    </div>
-  </ion-list>
+
+    </ion-list>
+  </div>
 </ion-content>

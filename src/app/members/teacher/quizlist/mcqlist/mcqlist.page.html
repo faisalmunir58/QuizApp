@@ -9,9 +9,8 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-list *ngFor="let mcq of Questions">
-    <div *ngIf="mcq.paperId==selected_quizid" style="border-bottom: 1px solid grey">
+  <div *ngFor="let mcq of Questions">
+    <ion-list *ngIf="mcq.paperId==selected_quizid">
 
       <ion-item-sliding>
         <ion-item lines="none">
@@ -24,7 +23,7 @@
           </ion-item-option>
 
           <ion-item-option color="danger">
-            <ion-icon (click)="deleteBtnAlert(mcq.id)" slot="start" name="trash-outline" ></ion-icon>
+            <ion-icon (click)="deleteBtnAlert(mcq.id)" slot="start" name="trash-outline"></ion-icon>
           </ion-item-option>
         </ion-item-options>
 
@@ -34,9 +33,9 @@
         <ion-button slot="end" (click)="alertForAddOption(mcq.id)">add option</ion-button>
         <ion-button slot="end" routerLink="optionlist/{{mcq.id}}">view option</ion-button>
       </ion-item>
-    </div>
-  </ion-list>
 
+    </ion-list>
+  </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="dark" routerLink="add-mcq">
       <ion-icon name="add"></ion-icon>

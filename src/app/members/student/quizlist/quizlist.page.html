@@ -12,10 +12,11 @@
     <ion-item lines="none">
       <ion-label>{{quiz.name}}</ion-label>
       <ion-button routerLink="/student/mcq/{{quiz.id}}">Start</ion-button>
+
     </ion-item>
 
     <ion-label color="medium" style="margin-left: 30px;">maxtime:{{quiz.allowedTime}}</ion-label>
-    <!-- <ion-label color="medium" style="margin-left: 50px;">maxattempts:{{quiz.allowedAttempts}}</ion-label> -->
+     <ion-label color="medium" style="margin-left: 50px;">maxattempts:{{quiz.allowedAttempts}}</ion-label>
   </ion-list>
 
 </ion-content>
